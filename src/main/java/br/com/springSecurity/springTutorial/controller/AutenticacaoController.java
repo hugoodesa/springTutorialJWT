@@ -13,14 +13,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-
-import javax.security.auth.message.AuthException;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin("*")
 public class AutenticacaoController extends AController<User, UserRepository> {
 
     @Autowired
@@ -35,6 +31,7 @@ public class AutenticacaoController extends AController<User, UserRepository> {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<TokenDto> post(@RequestBody UserForm body) {
 
         UsernamePasswordAuthenticationToken loginData = body.converter();
@@ -53,3 +50,4 @@ public class AutenticacaoController extends AController<User, UserRepository> {
         return ResponseEntity.badRequest().build();
     }
 }
+

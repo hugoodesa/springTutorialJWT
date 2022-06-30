@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/produtos")
-@CrossOrigin("*")
 public class ProdutoController extends AController<Produto, ProdutoRepository> {
 
     @Autowired
@@ -24,12 +23,14 @@ public class ProdutoController extends AController<Produto, ProdutoRepository> {
 
     @Override
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000",methods = RequestMethod.POST)
     public ResponseEntity<Produto> post(@RequestBody Produto body) {
         return super.post(body);
     }
 
     @Override
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000",methods = RequestMethod.GET)
     public ResponseEntity<Produto> select(@PathVariable Long id) {
         return super.select(id);
     }
