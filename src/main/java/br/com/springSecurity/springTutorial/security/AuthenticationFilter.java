@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @AllArgsConstructor @NoArgsConstructor
+@CrossOrigin("*")
 public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -54,6 +56,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     private String getToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
+
+        String login = request.getParameter("login");
+        System.out.println(login);
 
         boolean token = authorization != null &&
                 !authorization.isEmpty() &&

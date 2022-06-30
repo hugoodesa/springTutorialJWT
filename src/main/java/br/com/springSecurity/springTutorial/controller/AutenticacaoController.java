@@ -7,21 +7,20 @@ import br.com.springSecurity.springTutorial.controller.AController.AController;
 import br.com.springSecurity.springTutorial.repository.UserRepository;
 import br.com.springSecurity.springTutorial.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.message.AuthException;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin("*")
 public class AutenticacaoController extends AController<User, UserRepository> {
 
     @Autowired
@@ -35,6 +34,7 @@ public class AutenticacaoController extends AController<User, UserRepository> {
     AuthenticationManager auth;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TokenDto> post(@RequestBody UserForm body) {
 
         UsernamePasswordAuthenticationToken loginData = body.converter();

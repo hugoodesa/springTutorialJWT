@@ -55,19 +55,38 @@ public class security extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
 //                .and().formLogin();
 
-                http
-                        .authorizeRequests()
-                        .antMatchers(HttpMethod.GET,"/user").permitAll()
-                        .antMatchers(HttpMethod.GET,"/user").permitAll()
-                        .antMatchers(HttpMethod.GET,"/user/*").permitAll()
-                        .antMatchers(HttpMethod.GET,"/role/*").permitAll()
-                        .antMatchers(HttpMethod.POST,"/user").permitAll()
-                        .antMatchers(HttpMethod.POST,"/role").permitAll()
-                        .antMatchers(HttpMethod.POST,"/auth").permitAll()
-                        .anyRequest().authenticated()
-                        .and().csrf().disable()
-                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                        .and().addFilterBefore(new AuthenticationFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+//                http
+//                        .authorizeRequests()
+//                        .antMatchers(HttpMethod.GET,"/user").permitAll()
+//                        .antMatchers(HttpMethod.GET,"/user").permitAll()
+//                        .antMatchers(HttpMethod.GET,"/user/*").permitAll()
+//                        .antMatchers(HttpMethod.GET,"/produtos/*").permitAll()
+//                        .antMatchers(HttpMethod.GET,"/produtos/**").permitAll()
+//                        .antMatchers(HttpMethod.GET,"/role/*").permitAll()
+//                        .antMatchers(HttpMethod.POST,"/user").permitAll()
+//                        .antMatchers(HttpMethod.POST,"/role").permitAll()
+//                        .antMatchers(HttpMethod.POST,"/auth").permitAll()
+//                        .anyRequest().authenticated()
+//                        .and().csrf().disable()
+//                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                        .and().addFilterBefore(new AuthenticationFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+
+             http
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/user").permitAll()
+                .antMatchers(HttpMethod.GET,"/user").permitAll()
+                .antMatchers(HttpMethod.GET,"/user/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/produtos/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/produtos/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/role/*").permitAll()
+                .antMatchers(HttpMethod.POST,"/user").permitAll()
+                .antMatchers(HttpMethod.POST,"/role").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth").permitAll()
+                .anyRequest().authenticated()
+                .and().cors()
+                .and().csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().addFilterBefore(new AuthenticationFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
